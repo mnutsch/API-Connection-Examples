@@ -27,7 +27,16 @@ function post_to_url($url, $data) {
     curl_setopt($post, CURLOPT_POST, count($data));
     curl_setopt($post, CURLOPT_POSTFIELDS, $fields);
     curl_setopt($post, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($post, CURLOPT_FOLLOWLOCATION, TRUE);
+    curl_setopt($post, CURLOPT_FOLLOWLOCATION, TRUE);
+
+    //set port, may be unnecessary
+    curl_setopt($post, CURLOPT_PORT, 443);
+  
+    // Blindly accept the certificate
+    curl_setopt($post, CURLOPT_SSL_VERIFYPEER, false);
+  
+    //set user agent, may be unnecessary
+    curl_setopt($post, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"); // set browser/user agent    
 
     $result = curl_exec($post);
 
